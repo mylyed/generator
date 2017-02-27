@@ -14,7 +14,21 @@ public class ${classMode.className} {
     </#if>
     @Column(name="${fieldModel.dbFieldName}")
     private ${fieldModel.fieldType} ${fieldModel.fieldName};
+
+
 </#list>
+
+<#list  classMode.fieldModels as fieldModel>
+        public ${fieldModel.fieldType} get${fieldModel.fieldName?cap_first}() {
+            return ${fieldModel.fieldName};
+        }
+
+        public void set${fieldModel.fieldName?cap_first}(String ${fieldModel.fieldName}) {
+            this.${fieldModel.fieldName} = ${fieldModel.fieldName};
+        }
+
+</#list>
+
 
 }
 

@@ -14,9 +14,9 @@ public class DBUtil {
 
 
     static String driverName = "com.mysql.jdbc.Driver";
-    static String url = "jdbc:mysql://localhost:3306/db_book";
+    static String url = "jdbc:mysql://172.16.8.111:3306/db_order";
     static String username = "root";
-    static String password = "root";
+    static String password = "root-mysql-yo";
 
     private static Connection connection;
 

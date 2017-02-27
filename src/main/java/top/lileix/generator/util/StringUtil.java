@@ -13,7 +13,7 @@ public class StringUtil {
      * @return 转换后的驼峰式命名的字符串
      */
     public static String camelName(String name) {
-        name=name.toLowerCase();
+        name = name.toLowerCase();
         StringBuilder result = new StringBuilder();
         // 快速检查
         if (name == null || name.isEmpty()) {
@@ -41,6 +41,11 @@ public class StringUtil {
             }
         }
         return result.toString();
+    }
+
+    public static String capFirst(String name) {
+        name = camelName(name);
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
     public static void main(String[] args) {

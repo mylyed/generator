@@ -18,7 +18,7 @@ public class ClassMode {
 
     public ClassMode(TableModel tableModel) {
         String tempStr=StringUtil.camelName(tableModel.getName());
-        this.className =tempStr.substring(0,1).toUpperCase()+tempStr.substring(1);
+        this.className =StringUtil.capFirst(tableModel.getName());
         this.tableName = tableModel.getName();
         this.comment = tableModel.getComment();
     }

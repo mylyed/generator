@@ -23,13 +23,16 @@ import java.util.Map;
  */
 public class App {
     public static void main(String[] args) throws SQLException, IOException, TemplateException {
-
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
+        cfg.setDirectoryForTemplateLoading(new File(App.class.getClassLoader().getResource("").getPath()));
+        cfg.setDefaultEncoding("UTF-8");
+        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        Template temp = cfg.getTemplate("ModeTemplate.ftl");
         DBUtil dbUtil = new DBUtil();
         dbUtil.getAllTables(dbUtil.getConnection()).forEach(t -> {
             ClassMode classMode = new ClassMode(t);
             List<FieldModel> fieldModels = new ArrayList<FieldModel>();
             try {
-
                 dbUtil.getFields(dbUtil.getConnection(), t).forEach(
                         f -> {
                             FieldModel fieldModel = new FieldModel(f);
@@ -37,14 +40,8 @@ public class App {
                         }
                 );
                 classMode.setFieldModels(fieldModels);
-
                 System.out.println(JSONObject.toJSONString(classMode,true));
 
-                Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-                cfg.setDirectoryForTemplateLoading(new File(App.class.getClassLoader().getResource("").getPath()));
-                cfg.setDefaultEncoding("UTF-8");
-                cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-                Template temp = cfg.getTemplate("ModeTemplate.ftl");
                 Writer out = new OutputStreamWriter(System.out);
                 Map root = new HashMap();
                 root.put("classMode", classMode);
